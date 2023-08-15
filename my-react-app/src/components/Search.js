@@ -1,8 +1,10 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
+import Button from 'react-bootstrap/Button';
+
 const Search = () => {
 
-    const [city, setCity] = useState('')
+    const [city, setCity] = useState('') //setiing city variable to be changed w useState
     const [weatherData, setWeatherData] = useState(null);
     const apiKey = '3ece5db27d82f1997817e7b484233ed1'; // My api key
 
@@ -17,32 +19,53 @@ const Search = () => {
         .catch(error => console.error('Error fetching data:', error));
     
       };
+
+      const kelvinToFahrenheit = (kelvin) => {
+        return ((kelvin - 273.15) * 9/5) + 32;
+      };
+
+
+
   return (
     <div>
+ 
 
-<input
+    {weatherData && (
+        <div style={{backgroundColor:"white", position:"absolute", top:'18%', right:'35%', borderRadius:'30px', height:'550px', width:'550px'}}  >
+       <input
+
+        style={{position:'absolute', right:"45%", top:'10px', fontFamily:'monospace', width:'250px',  border:'solid 3px black', height:'35px'}}
         type="text"
         placeholder="Enter city"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-      />       
-<button
+      />  
+
+      <Button variant="secondary"
+
+      style={{position:'absolute', right:"17%", top:'8px', fontFamily:'monospace', backgroundColor:'black'}}
+       onClick={fetchWeatherData}
+      >Get Weather</Button>
+
+           
+          <h2   style={{position:'absolute', right:"22%", bottom:'74%', fontFamily:'monospace'}}>Weather in {weatherData.name}</h2>
+          <p style={{position:'absolute', bottom:'46%', right:'33%', fontSize:'30px', fontFamily:'monospace'}}>Temp {kelvinToFahrenheit(weatherData.main.temp).toFixed(2)}F </p>
+          <p style={{position:'absolute', bottom:'8%', right:'38%', fontSize:'25px', fontFamily:'monospace'}} >Weather: {weatherData.weather[0].description}</p>
+          <img  style={{position:'absolute', bottom:'2%', right:'9%', height:'130px'}}
+            src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+            alt={weatherData.weather[0].description}
+          />
 
 
-onClick={fetchWeatherData}
->Search</button>
-{weatherData && (
-        <div>
-          <h2>Weather in {weatherData.name}</h2>
-          <p>Temperature: {weatherData.main.temp} K</p>
-          <p>Weather: {weatherData.weather[0].description}</p>
+
         </div>
       )}
 
+</div>
+ 
 
 
-
-    </div>
+  
   )
 }
 
