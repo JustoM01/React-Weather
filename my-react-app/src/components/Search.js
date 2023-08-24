@@ -29,8 +29,6 @@ const Search = () => {
   return (
     <div>
  
-   
-   
 
        <input
 
@@ -54,7 +52,7 @@ const Search = () => {
         <>
             <h2   style={{position:'absolute', right:"22%", bottom:'74%', fontFamily:'monospace'}}>Weather in {weatherData.name}</h2>
             <p style={{position:'absolute', bottom:'46%', right:'33%', fontSize:'30px', fontFamily:'monospace'}}>Temp {kelvinToFahrenheit(weatherData.main.temp).toFixed(2)}F </p>
-            <p style={{position:'absolute', bottom:'8%', right:'38%', fontSize:'25px', fontFamily:'monospace'}} >Weather: {weatherData.weather[0].description}</p>
+            <p style={{position:'absolute', bottom:'8%', right:'35%', fontSize:'25px', fontFamily:'monospace'}} >Weather: {weatherData.weather[0].description}</p>
             <img  style={{position:'absolute', bottom:'2%', right:'9%', height:'130px'}}
                 src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
                 alt={weatherData.weather[0].description}
@@ -69,7 +67,6 @@ const Search = () => {
 
 </div>
  
-
 
   
   )
